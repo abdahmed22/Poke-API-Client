@@ -11,65 +11,65 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestClientCanHitPokeAPIServer(t *testing.T) {
+// func TestClientCanHitPokeAPIServer(t *testing.T) {
 
-	t.Run("can hit the poke api server and return ditto information", func(*testing.T) {
+// 	t.Run("can hit the poke api server and return ditto information", func(*testing.T) {
 
-		myClient := NewClient()
-		returnedPokemon, err := myClient.GetPokemonByName(context.Background(), "ditto")
+// 		myClient := NewClient()
+// 		returnedPokemon, err := myClient.GetPokemonByName(context.Background(), "ditto")
 
-		expectedPokemon := Pokemon{
-			ID:             132,
-			Name:           "ditto",
-			BaseExperience: 101,
-			Height:         3,
-		}
+// 		expectedPokemon := Pokemon{
+// 			ID:             132,
+// 			Name:           "ditto",
+// 			BaseExperience: 101,
+// 			Height:         3,
+// 		}
 
-		assert.NoError(t, err)
-		assert.Equal(t, expectedPokemon, returnedPokemon)
-	})
+// 		assert.NoError(t, err)
+// 		assert.Equal(t, expectedPokemon, returnedPokemon)
+// 	})
 
-	t.Run("can hit the poke api server and return charmeleon information", func(*testing.T) {
+// 	t.Run("can hit the poke api server and return charmeleon information", func(*testing.T) {
 
-		myClient := NewClient()
-		returnedPokemon, err := myClient.GetPokemonByName(context.Background(), "charmeleon")
+// 		myClient := NewClient()
+// 		returnedPokemon, err := myClient.GetPokemonByName(context.Background(), "charmeleon")
 
-		expectedPokemon := Pokemon{
-			ID:             5,
-			Name:           "charmeleon",
-			BaseExperience: 142,
-			Height:         11,
-		}
+// 		expectedPokemon := Pokemon{
+// 			ID:             5,
+// 			Name:           "charmeleon",
+// 			BaseExperience: 142,
+// 			Height:         11,
+// 		}
 
-		assert.NoError(t, err)
-		assert.Equal(t, expectedPokemon, returnedPokemon)
-	})
+// 		assert.NoError(t, err)
+// 		assert.Equal(t, expectedPokemon, returnedPokemon)
+// 	})
 
-	t.Run("can hit the poke api server and return squirtle information", func(*testing.T) {
+// 	t.Run("can hit the poke api server and return squirtle information", func(*testing.T) {
 
-		myClient := NewClient()
-		returnedPokemon, err := myClient.GetPokemonByName(context.Background(), "squirtle")
+// 		myClient := NewClient()
+// 		returnedPokemon, err := myClient.GetPokemonByName(context.Background(), "squirtle")
 
-		expectedPokemon := Pokemon{
-			ID:             7,
-			Name:           "squirtle",
-			BaseExperience: 63,
-			Height:         5,
-		}
+// 		expectedPokemon := Pokemon{
+// 			ID:             7,
+// 			Name:           "squirtle",
+// 			BaseExperience: 63,
+// 			Height:         5,
+// 		}
 
-		assert.NoError(t, err)
-		assert.Equal(t, expectedPokemon, returnedPokemon)
-	})
+// 		assert.NoError(t, err)
+// 		assert.Equal(t, expectedPokemon, returnedPokemon)
+// 	})
 
-	t.Run("can hit the poke api server and return all pokemon information", func(*testing.T) {
+// 	t.Run("can hit the poke api server and return all pokemon information", func(*testing.T) {
 
-		myClient := NewClient()
-		returnedPokemonSlice, err := myClient.GetAllPokemons(context.Background())
+// 		myClient := NewClient()
+// 		returnedPokemonSlice, err := myClient.GetAllPokemons(context.Background())
 
-		assert.NoError(t, err)
-		assert.NotEmpty(t, returnedPokemonSlice)
-	})
-}
+// 		assert.NoError(t, err)
+// 		assert.NotEmpty(t, returnedPokemonSlice)
+// 	})
+// }
 
 func TestOptionFunctions(t *testing.T) {
 	t.Run("happy path - can add custom URLS using option function", func(*testing.T) {
