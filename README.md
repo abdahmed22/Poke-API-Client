@@ -11,7 +11,7 @@ A client-server denotes a relationship between cooperating programs in an applic
 3. Create demo.go file inside the working directory
 4. import the package using 
    ```GO
-	  import "github.com/codescalersinternships/DateTime-Client-Abdelrahman-Mahmoud"
+	  import "github.com/codescalersinternships/PokeAPI-Client-Abdelrahman-Mahmoud"
    ```
 5. Finish writing your desired code 
 6. Open terminal
