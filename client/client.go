@@ -30,11 +30,11 @@ type BodyFormat struct {
 
 // NewClient creates a new client
 func NewClient(options ...Option) *Client {
+
 	err := godotenv.Load("../.env")
 	if err != nil {
 		log.Fatalf("Error loading .env file: %s", err)
 	}
-
 	client := &Client{
 		httpClient: http.DefaultClient,
 		URL:        os.Getenv("URL"),
