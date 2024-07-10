@@ -8,19 +8,18 @@ A client-server denotes a relationship between cooperating programs in an applic
 
 1. Clone the Repository to a directory of your choice.
 2. Make sure you have go version 1.22.4 installed on your device
-3. Run the server use as a reference https://github.com/codescalersinternships/DateTime-Server-Abdelrahman-Mahmoud/tree/development
-4. Create demo.go file inside the working directory
-5. import the package using 
+3. Create demo.go file inside the working directory
+4. import the package using 
    ```GO
 	  import "github.com/codescalersinternships/DateTime-Client-Abdelrahman-Mahmoud"
    ```
-6. Finish writing your desired code 
-7. Open terminal
-8. Build the project using
+5. Finish writing your desired code 
+6. Open terminal
+7. Build the project using
    ```console
    user@user-VirtualBox:~$ go build demo.go
    ```
-9. Run the project using
+8. Run the project using
    ```console
    user@user-VirtualBox:~$ ./demo
    ```
