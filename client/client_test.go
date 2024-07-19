@@ -3,11 +3,13 @@ package httpclient
 import (
 	"context"
 	"fmt"
+	"log"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 	"time"
 
+	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -74,6 +76,11 @@ import (
 func TestOptionFunctions(t *testing.T) {
 	t.Run("happy path - can add custom URLS using option function", func(*testing.T) {
 
+		err := godotenv.Load("../.env")
+		if err != nil {
+			log.Fatalf("Error loading .env file: %s", err)
+		}
+
 		myClient := NewClient(
 			CustomURL("custom_url"),
 		)
@@ -83,6 +90,11 @@ func TestOptionFunctions(t *testing.T) {
 
 	t.Run("happy path - can add custom client using option function", func(*testing.T) {
 
+		err := godotenv.Load("../.env")
+		if err != nil {
+			log.Fatalf("Error loading .env file: %s", err)
+		}
+
 		myClient := NewClient(
 			CustomEndPoint("/endpoint"),
 		)
@@ -91,6 +103,11 @@ func TestOptionFunctions(t *testing.T) {
 	})
 
 	t.Run("happy path - can add custom client using option function", func(*testing.T) {
+
+		err := godotenv.Load("../.env")
+		if err != nil {
+			log.Fatalf("Error loading .env file: %s", err)
+		}
 
 		myClient := NewClient(
 			CustomClient(&http.Client{
@@ -114,6 +131,11 @@ func TestClientGetPokemonByNameCanHitMockServer(t *testing.T) {
 		)
 
 		defer mockServer.Close()
+
+		err := godotenv.Load("../.env")
+		if err != nil {
+			log.Fatalf("Error loading .env file: %s", err)
+		}
 
 		myClient := NewClient(
 			CustomURL(mockServer.URL),
@@ -145,11 +167,16 @@ func TestClientGetPokemonByNameCanHitMockServer(t *testing.T) {
 
 		defer mockServer.Close()
 
+		err := godotenv.Load("../.env")
+		if err != nil {
+			log.Fatalf("Error loading .env file: %s", err)
+		}
+
 		myClient := NewClient(
 			CustomURL(mockServer.URL),
 		)
 
-		_, err := myClient.GetPokemonByName(context.Background(), "squirtle")
+		_, err = myClient.GetPokemonByName(context.Background(), "squirtle")
 
 		assert.Error(t, err)
 
@@ -166,11 +193,16 @@ func TestClientGetPokemonByNameCanHitMockServer(t *testing.T) {
 
 		defer mockServer.Close()
 
+		err := godotenv.Load("../.env")
+		if err != nil {
+			log.Fatalf("Error loading .env file: %s", err)
+		}
+
 		myClient := NewClient(
 			CustomURL(mockServer.URL),
 		)
 
-		_, err := myClient.GetPokemonByName(context.Background(), "squirtle")
+		_, err = myClient.GetPokemonByName(context.Background(), "squirtle")
 
 		assert.Error(t, err)
 
@@ -190,6 +222,11 @@ func TestClientGetAllPokemonsCanHitMockServer(t *testing.T) {
 		)
 
 		defer mockServer.Close()
+
+		err := godotenv.Load("../.env")
+		if err != nil {
+			log.Fatalf("Error loading .env file: %s", err)
+		}
 
 		myClient := NewClient(
 			CustomURL(mockServer.URL),
@@ -235,11 +272,16 @@ func TestClientGetAllPokemonsCanHitMockServer(t *testing.T) {
 
 		defer mockServer.Close()
 
+		err := godotenv.Load("../.env")
+		if err != nil {
+			log.Fatalf("Error loading .env file: %s", err)
+		}
+
 		myClient := NewClient(
 			CustomURL(mockServer.URL),
 		)
 
-		_, err := myClient.GetAllPokemons(context.Background())
+		_, err = myClient.GetAllPokemons(context.Background())
 
 		assert.Error(t, err)
 
@@ -256,11 +298,16 @@ func TestClientGetAllPokemonsCanHitMockServer(t *testing.T) {
 
 		defer mockServer.Close()
 
+		err := godotenv.Load("../.env")
+		if err != nil {
+			log.Fatalf("Error loading .env file: %s", err)
+		}
+
 		myClient := NewClient(
 			CustomURL(mockServer.URL),
 		)
 
-		_, err := myClient.GetAllPokemons(context.Background())
+		_, err = myClient.GetAllPokemons(context.Background())
 
 		assert.Error(t, err)
 

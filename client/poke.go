@@ -20,26 +20,10 @@ func (c *Client) GetPokemonByName(ctx context.Context, pokemonName string) (Poke
 		return Pokemon{}, fmt.Errorf("failed to create request: %w", err)
 	}
 
-	b := backoff.NewExponentialBackOff()
-	b.MaxElapsedTime = 3 * time.Second
+	res, err := c.SendRequest(req, 5)
 
-	var (
-		res    *http.Response
-		resErr error
-	)
-
-	retryable := func() error {
-		res, resErr = c.httpClient.Do(req)
-		return fmt.Errorf("error after retrying: %w", resErr)
-	}
-
-	notify := func(err error, t time.Duration) {
-
-	}
-
-	err = backoff.RetryNotify(retryable, b, notify)
 	if err != nil {
-		return Pokemon{}, fmt.Errorf("error after retrying: %w", err)
+		return Pokemon{}, fmt.Errorf("faild to send request: %w", err)
 	}
 
 	defer res.Body.Close()
@@ -66,26 +50,10 @@ func (c *Client) GetAllPokemons(ctx context.Context) ([]Pokemon, error) {
 		return []Pokemon{}, fmt.Errorf("failed to create request: %w", err)
 	}
 
-	b := backoff.NewExponentialBackOff()
-	b.MaxElapsedTime = 3 * time.Second
+	res, err := c.SendRequest(req, 5)
 
-	var (
-		res    *http.Response
-		resErr error
-	)
-
-	retryable := func() error {
-		res, resErr = c.httpClient.Do(req)
-		return fmt.Errorf("error after retrying: %w", resErr)
-	}
-
-	notify := func(err error, t time.Duration) {
-
-	}
-
-	err = backoff.RetryNotify(retryable, b, notify)
 	if err != nil {
-		return []Pokemon{}, fmt.Errorf("error after retrying: %w", err)
+		return []Pokemon{}, fmt.Errorf("faild to send request: %w", err)
 	}
 
 	defer res.Body.Close()
@@ -102,4 +70,35 @@ func (c *Client) GetAllPokemons(ctx context.Context) ([]Pokemon, error) {
 	}
 
 	return body.Pokemons, nil
+}
+
+// SendRequest keeps sending request till the server responds for n seconds
+func (c *Client) SendRequest(req *http.Request, n int) (*http.Response, error) {
+	b := backoff.NewExponentialBackOff()
+	b.MaxElapsedTime = time.Duration(n) * time.Second
+
+	var (
+		res    *http.Response
+		resErr error
+	)
+
+	retryable := func() error {
+		res, resErr = c.httpClient.Do(req)
+		if resErr != nil {
+			return fmt.Errorf("error after retrying: %w", resErr)
+		}
+		return nil
+	}
+
+	notify := func(err error, t time.Duration) {
+
+	}
+
+	err := backoff.RetryNotify(retryable, b, notify)
+
+	if err != nil {
+		return res, err
+	}
+
+	return res, nil
 }
