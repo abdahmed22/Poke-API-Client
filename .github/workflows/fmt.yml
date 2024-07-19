@@ -18,19 +18,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout code
     - uses: actions/checkout@v4
     
     - name: Install Go
       uses: actions/setup-go@v5
       with:
         go-version: ${{ env.GO_VERSION }}
-        
-    - name: Checkout code
-      uses: actions/checkout@v4
       
-    - name: Install dependencies
-      run: make install_dependencies
-
     - name: Run format
       run: make format
 
