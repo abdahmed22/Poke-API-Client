@@ -5,10 +5,18 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/joho/godotenv"
+
 	client "github.com/codescalersinternships/PokeAPI-Client-Abdelrahman-Mahmoud/client"
 )
 
 func main() {
+
+	err := godotenv.Load("../.env")
+	if err != nil {
+		log.Fatalf("Error loading .env file: %s", err)
+	}
+
 	fmt.Println("Client created")
 
 	myClient := client.NewClient()
